@@ -5,12 +5,14 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import React, { useState } from 'react'
 
 
-function FormularioCadastro({aoEnviar}) {
+function FormularioCadastro({aoEnviar, validarCPF}) {
     const [nome, setNome] = useState("")
     const [sobrenome, setSobrenome] = useState("")
     const [cpf, setCpf] = useState("")
     const [promocoes, setPromocoes] = useState("true")
     const [novidades, setNovidades] = useState("true")
+
+    const[erros, setErros] = useState({cpf:{valido:true, texto:""}})
 
     return(
         <form onSubmit={(event)=> {
@@ -46,6 +48,12 @@ function FormularioCadastro({aoEnviar}) {
                         setCpf(event.target.value)
                     }
                 }
+                onBlur={(event) =>{
+                    const valido = validarCPF(cpf)
+                    setErros({cpf:valido})
+                }}
+                error={!erros.cpf.valido}
+                helperText={erros.cpf.texto}
                 id='cpf' 
                 label='CPF:' 
                 variant='outlined' 
