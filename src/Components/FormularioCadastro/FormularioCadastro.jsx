@@ -5,26 +5,23 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import React, { useState } from 'react'
 
 
-function FormularioCadastro() {
+function FormularioCadastro({aoEnviar}) {
     const [nome, setNome] = useState("")
     const [sobrenome, setSobrenome] = useState("")
     const [cpf, setCpf] = useState("")
+    const [promocoes, setPromocoes] = useState("true")
+    const [novidades, setNovidades] = useState("true")
 
     return(
         <form onSubmit={(event)=> {
-                event.preventDefault()
-                console.log(nome, sobrenome, cpf)
-            }
-        }>
+                event.preventDefault();
+                aoEnviar({nome, sobrenome, cpf, novidades, promocoes})
+            }}
+        >
             <TextField
                 value={nome}
                 onChange={(event) => {
-                        let tmpNome = event.target.value
-                        if(nome.length >= 3){
-                            tmpNome = tmpNome.substring(0, 3)
-                        }
-                    
-                        setNome(tmpNome)
+                        setNome(event.target.value)
                     }
                 }
                 id='nome' 
@@ -56,11 +53,15 @@ function FormularioCadastro() {
                 margin='normal'/>
             <FormControlLabel 
                 label='Promoções' 
-                control={<Switch name='promocoes' defaultChecked />} 
+                control={<Switch checked={promocoes} onChange={(event) =>{
+                    setPromocoes(event.target.checked)
+                }} name='promocoes' defaultChecked={promocoes} />} 
             />
             <FormControlLabel 
                 label='Novidades' 
-                control={<Switch name='novidades' defaultChecked />} 
+                control={<Switch checked={novidades} onChange={(event) =>{
+                    setNovidades(event.target.checked)
+                }} name='novidades' defaultChecked={novidades} />} 
             />
             <Button 
                 type="submit" 
