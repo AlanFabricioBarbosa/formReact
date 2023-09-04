@@ -27,7 +27,8 @@ function DadosPessoais({aoEnviar, validarCPF}) {
                     }
                 }
                 id='nome' 
-                label='Nome:' 
+                label='Nome:'
+                required
                 variant='outlined' 
                 fullWidth  
                 margin='normal'/>
@@ -38,7 +39,8 @@ function DadosPessoais({aoEnviar, validarCPF}) {
                     }
                 }
                 id='sobrenome' 
-                label='Sobrenome:' 
+                label='Sobrenome:'
+                required 
                 variant='outlined' 
                 fullWidth  
                 margin='normal'/>
@@ -56,6 +58,7 @@ function DadosPessoais({aoEnviar, validarCPF}) {
                 helperText={erros.cpf.texto}
                 id='cpf' 
                 label='CPF:' 
+                required
                 variant='outlined' 
                 fullWidth  
                 margin='normal'/>
