@@ -4,7 +4,7 @@ import DadosUsuario from './DadosUsuario'
 import DadosEntrega from './DadosEntregas'
 import { Step, StepLabel, Stepper, Typography } from '@mui/material'
 
-function FormularioCadastro({aoEnviar, validacoes}) {   
+function FormularioCadastro({aoEnviar}) {   
     const [etapaAtual, setEtapaAtual] = useState(0)
     const [dadaosColetados, setDados] = useState({})
     useEffect(()=>{
@@ -14,9 +14,9 @@ function FormularioCadastro({aoEnviar, validacoes}) {
     })
 
     const formularios =[
-    <DadosUsuario aoEnviar={proximo} validacoes={validacoes}/>, 
-    <DadosPessoais aoEnviar={proximo} validacoes={validacoes}/>,
-    <DadosEntrega aoEnviar={coletarDados} validacoes={validacoes}/>,
+    <DadosUsuario aoEnviar={proximo} />, 
+    <DadosPessoais aoEnviar={proximo} />,
+    <DadosEntrega aoEnviar={coletarDados} />,
     <Typography variant='h4'>Obrigado pelo Cadastro</Typography>
 ]
 
