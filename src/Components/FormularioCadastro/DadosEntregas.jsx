@@ -19,7 +19,8 @@ const [cidade, setCidade] = useState("")
                 onChange={(event) => {
                     setCep(event.target.value)
                 }}
-                id="cep" 
+                id="cep"
+                name="cep"
                 label="CEP:" 
                 type="number" 
                 required         
@@ -31,7 +32,8 @@ const [cidade, setCidade] = useState("")
                 onChange={(event) => {
                     setEndereco(event.target.value)
                 }}
-                id="endereco" 
+                id="endereco"
+                name="endereco"
                 label="Endereço:" 
                 type="text"    
                 required      
@@ -44,7 +46,8 @@ const [cidade, setCidade] = useState("")
                 onChange={(event) => {
                     setNumero(event.target.value)
                 }}
-                id="numero" 
+                id="numero"
+                name="numero"
                 label="Numero:" 
                 type="number"  
                 required        
@@ -56,7 +59,8 @@ const [cidade, setCidade] = useState("")
                 onChange={(event) => {
                     setEstado(event.target.value)
                 }}
-                id="estado" 
+                id="estado"
+                name="estado"
                 label="Estado:" 
                 type="text"  
                 required        
@@ -68,7 +72,8 @@ const [cidade, setCidade] = useState("")
                 onChange={(event) => {
                     setCidade(event.target.value)
                 }}
-                id="cidade" 
+                id="cidade"
+                name="cidade"
                 label="Cidade:" 
                 type="text"   
                 required       

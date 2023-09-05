@@ -5,19 +5,37 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import React, { useState } from 'react'
 
 
-function DadosPessoais({aoEnviar, validarCPF}) {
+function DadosPessoais({aoEnviar, validacoes}) {
     const [nome, setNome] = useState("")
     const [sobrenome, setSobrenome] = useState("")
     const [cpf, setCpf] = useState("")
     const [promocoes, setPromocoes] = useState("true")
     const [novidades, setNovidades] = useState("true")
-
     const[erros, setErros] = useState({cpf:{valido:true, texto:""}})
+
+    function validarCampos(event) {
+        const {name, value} = event.target
+        const novoEstado = {...erros}
+        novoEstado[name] = validacoes[name](value)
+        setErros(novoEstado)
+    }
+
+    function possoEnviar(){
+        for(let campo in erros){
+            if(!erros[campo].valido)
+            {
+                return false
+            }
+        }
+        return true
+    }
 
     return(
         <form onSubmit={(event)=> {
                 event.preventDefault();
-                aoEnviar({nome, sobrenome, cpf, novidades, promocoes})
+                if(possoEnviar()){
+                    aoEnviar({nome, sobrenome, cpf, novidades, promocoes})
+                }
             }}
         >
             <TextField
@@ -26,7 +44,8 @@ function DadosPessoais({aoEnviar, validarCPF}) {
                         setNome(event.target.value)
                     }
                 }
-                id='nome' 
+                id='nome'
+                name="nome"
                 label='Nome:'
                 required
                 variant='outlined' 
@@ -38,7 +57,8 @@ function DadosPessoais({aoEnviar, validarCPF}) {
                         setSobrenome(event.target.value)
                     }
                 }
-                id='sobrenome' 
+                id='sobrenome'
+                name="sobrenome"
                 label='Sobrenome:'
                 required 
                 variant='outlined' 
@@ -50,13 +70,11 @@ function DadosPessoais({aoEnviar, validarCPF}) {
                         setCpf(event.target.value)
                     }
                 }
-                onBlur={(event) =>{
-                    const valido = validarCPF(event.target.value)
-                    setErros({cpf:valido})
-                }}
+                onBlur={validarCampos}
                 error={!erros.cpf.valido}
                 helperText={erros.cpf.texto}
-                id='cpf' 
+                id='cpf'
+                name="cpf"
                 label='CPF:' 
                 required
                 variant='outlined' 
@@ -78,7 +96,7 @@ function DadosPessoais({aoEnviar, validarCPF}) {
                 type="submit" 
                 variant='contained' 
                 color='primary'>
-                    Cadastrar
+                    Próximo
             </Button>
         </form>
     )
